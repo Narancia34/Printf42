@@ -6,13 +6,13 @@
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 12:07:42 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/20 15:29:16 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:34:12 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-int hexacount(int n)
+int	ft_hexacount(unsigned long int n)
 {
 	int	i;
 
@@ -25,20 +25,17 @@ int hexacount(int n)
 	return (i);
 }
 
-int	ft_puthexa(int n, const char format)
+int	ft_puthexa(unsigned int n, const char format)
 {
-	int printed;
-
 	if (n == 0)
 	{
 		ft_putchar(0 + '0');
 		return (1);
 	}
-	printed = hexacount(n);
 	if (n >= 16)
 	{
-		ft_puthexa(n/16, format);
-		ft_puthexa(n%16, format);
+		ft_puthexa (n / 16, format);
+		ft_puthexa (n % 16, format);
 	}
 	else
 	{
@@ -52,5 +49,5 @@ int	ft_puthexa(int n, const char format)
 				ft_putchar(((n - 10) + 'A'));
 		}
 	}
-	return (printed);
+	return (ft_hexacount(n));
 }

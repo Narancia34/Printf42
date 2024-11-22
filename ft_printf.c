@@ -6,15 +6,15 @@
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:32:42 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/20 15:41:00 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/22 09:45:18 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int	ft_formatcheck(va_list args, const char c)
 {
-	int printed;
+	int	printed;
 
 	printed = 0;
 	if (c == '%')
@@ -26,41 +26,52 @@ int	ft_formatcheck(va_list args, const char c)
 	else if (c == 'd' || c == 'i')
 		printed = ft_putnbr(va_arg(args, int));
 	else if (c == 'x' || c == 'X')
-		printed = ft_puthexa(va_arg(args, int), c);
+		printed = ft_puthexa(va_arg(args, unsigned int), c);
 	else if (c == 'p')
 		printed = ft_putaddress(va_arg(args, void *));
+	else if (c == 'u')
+		printed = ft_putunint(va_arg(args, unsigned int));
+	else
+	{
+		printed = ft_putchar('%');
+		printed += ft_putchar(c);
+	}
 	return (printed);
 }
 
 int	ft_printf(const char *formats, ...)
 {
 	va_list	args;
-	int	i;
-	int printed;
-	
+	int		printed;
+	int		i;
+
+	if (formats == NULL)
+		return (-1);
 	i = 0;
 	printed = 0;
 	va_start(args, formats);
 	while (formats[i])
 	{
-		if (formats[i] == '%')
+		if (formats[i] == '%' && formats[i+1] != '\0')
 		{
 			i++;
 			printed += ft_formatcheck(args, formats[i]);
-			i++;
+		}
+		else if (formats[i] == '%' && formats[i+1] == '\0')
+		{
+			return (-1);
+			va_end(args);
 		}
 		else
-		{
-			ft_putchar(formats[i]);
-			printed++;
-			i++;
-		}
+			printed += ft_putchar(formats[i]);
+		i++;
 	}
 	va_end(args);
 	return (printed);
 }
 // int main ()
 // {
-// 	int i = ft_printf("%p", 4568, 13);
-// 	ft_printf("\n%d", i);
+// 	void *p = "test";
+// 	ft_printf("%u----%x----%X---l%d----%p\n", -107553, 38535, -30765, -8373, p);
+// 	printf("%u----%x----%X---l%d----%p\n", -107553, 38535, -30765, -8373, p);
 // }

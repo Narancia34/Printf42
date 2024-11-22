@@ -1,7 +1,8 @@
 CC = cc
 FLAGS =	-Wall -Werror -Wextra
 NAME = libftprintf.a
-SRCS = ft_putchar.c ft_putstr.c ft_putnbr.c ft_puthexa.c ft_putaddress.c ft_printf.c
+SRCS = ft_putchar.c ft_putstr.c ft_putnbr.c ft_puthexa.c \
+ft_putaddress.c ft_printf.c ft_putunint.c
 OFILES =	$(SRCS:.c=.o)
 
 $(NAME): $(OFILES)

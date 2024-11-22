@@ -6,19 +6,21 @@
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:58:17 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/20 11:53:03 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:34:15 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-int	digitcount(int n)
+int	ft_digitcount(int n)
 {
-	long nb;
-	int	count;
+	long	nb;
+	int		count;
 
 	nb = n;
 	count = 0;
+	if (nb == 0)
+		return (1);
 	if (nb < 0)
 	{
 		nb *= -1;
@@ -49,5 +51,5 @@ int	ft_putnbr(int n)
 	}
 	else
 		ft_putchar((nb + '0'));
-	return (digitcount(n));
+	return (ft_digitcount(n));
 }

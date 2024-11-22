@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putunint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 11:25:04 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/20 15:41:32 by mgamraou         ###   ########.fr       */
+/*   Created: 2024/11/21 09:59:26 by mgamraou          #+#    #+#             */
+/*   Updated: 2024/11/21 11:34:19 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libftprintf.h"
 
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdarg.h>
+int	ft_putunint(unsigned int n)
+{
+	unsigned int	nb;
+	int				i;
 
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int n);
-int	ft_puthexa(int n, const char format);
-int	ft_putaddress(void *ptr);
-int	ft_printf(const char *formats, ...);
-
-#endif
+	nb = n;
+	i = 0;
+	if (n == 0)
+	{
+		ft_putchar(0 + '0');
+		return (1);
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	if (n > 9)
+	{
+		ft_putunint(n / 10);
+		ft_putchar((n % 10) + '0');
+	}
+	else if (n <= 9)
+		ft_putchar((n % 10) + '0');
+	return (i);
+}

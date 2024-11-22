@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 11:06:55 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/20 11:50:11 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:27:04 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int	ft_putstr(char *s)
 {
 	int	i;
 
 	if (!s)
-		return (0);
+		return (ft_printf("(null)"));
 	i = 0;
 	while (s[i])
 	{
