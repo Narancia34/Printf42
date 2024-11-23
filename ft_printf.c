@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:32:42 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/22 09:45:18 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:18:06 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,28 @@ int	ft_formatcheck(va_list args, const char c)
 	else if (c == 'u')
 		printed = ft_putunint(va_arg(args, unsigned int));
 	else
-	{
 		printed = ft_putchar('%');
-		printed += ft_putchar(c);
-	}
 	return (printed);
 }
 
-int	ft_printf(const char *formats, ...)
+int	ft_checkparam(const char *formats, va_list args)
 {
-	va_list	args;
-	int		printed;
-	int		i;
+	int	i;
+	int	printed;
 
-	if (formats == NULL)
-		return (-1);
 	i = 0;
 	printed = 0;
-	va_start(args, formats);
 	while (formats[i])
 	{
-		if (formats[i] == '%' && formats[i+1] != '\0')
+		if (formats[i] == '%' && formats[i + 1] != '\0')
 		{
 			i++;
 			printed += ft_formatcheck(args, formats[i]);
 		}
-		else if (formats[i] == '%' && formats[i+1] == '\0')
+		else if (formats[i] == '%' && formats[i + 1] == '\0')
 		{
-			return (-1);
 			va_end(args);
+			return (-1);
 		}
 		else
 			printed += ft_putchar(formats[i]);
@@ -69,9 +62,13 @@ int	ft_printf(const char *formats, ...)
 	va_end(args);
 	return (printed);
 }
-// int main ()
-// {
-// 	void *p = "test";
-// 	ft_printf("%u----%x----%X---l%d----%p\n", -107553, 38535, -30765, -8373, p);
-// 	printf("%u----%x----%X---l%d----%p\n", -107553, 38535, -30765, -8373, p);
-// }
+
+int	ft_printf(const char *formats, ...)
+{
+	va_list	args;
+
+	if (formats == NULL)
+		return (-1);
+	va_start(args, formats);
+	return (ft_checkparam(formats, args));
+}
