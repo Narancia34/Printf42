@@ -6,7 +6,7 @@
 /*   By: mgamraou <mgamraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:32:42 by mgamraou          #+#    #+#             */
-/*   Updated: 2024/11/23 10:18:06 by mgamraou         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:30:40 by mgamraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	ft_formatcheck(va_list args, const char c)
 	else if (c == 'u')
 		printed = ft_putunint(va_arg(args, unsigned int));
 	else
+	{
 		printed = ft_putchar('%');
+		printed += ft_putchar(c);
+	}
 	return (printed);
 }
 
